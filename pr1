@@ -1,0 +1,37 @@
+def guess_number_game():
+    print("Привіт! Давай зіграємо в гру.")
+    
+    try:
+        n = int(input("Задай верхню межу числа: "))
+    except ValueError:
+        print("Будь ласка, введіть ціле число.")
+        return
+
+    print(f"Загадай число від 1 до {n} і натисни Enter.")
+    input()
+
+    low, high, guesses = 1, n, 0
+
+    while low <= high:
+        guesses += 1
+        guess = (low + high) // 2
+        print(f"Мій здогад: {guess}")
+
+        ans = input("Це твоє число? (так/більше/менше): ").lower().strip()
+
+        if ans == "так":
+            print(f"Готово! Вгадано за {guesses} спроб.")
+            break
+        elif ans == "більше":
+            low = guess + 1
+        elif ans == "менше":
+            high = guess - 1
+        else:
+            print("Використовуй: 'так', 'більше' або 'менше'.")
+            guesses -= 1 
+
+    if low > high:
+        print("Схоже, сталася помилка у відповідях.")
+
+if __name__ == "__main__":
+    guess_number_game()
